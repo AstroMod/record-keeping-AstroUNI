@@ -17,6 +17,10 @@ bool Student::operator<(const Student& other) const {
     return tolower(surname) < tolower(other.surname); // order by name
 }
 
+bool Student::operator== (const Student& other) const {
+    return this->name == other.name && this->surname == other.surname && this->id == other.id;
+}
+
 void st_search (const std::string& keyword) {
     std::cout << "Searching...\n";
     for (Student st : st_list){
@@ -52,6 +56,21 @@ void add_mark (const int& st_id, const int& sj_id, const int& mark) {
     st_X_sj.push_back(mr);
 }
 
+void remove_st (const Student& ex) {
+    for (std::vector<Student>::iterator it = st_list.begin(), end = st_list.end(); it != end; ++it) {
+        if (ex == *it) {
+            std::string del = "0";
+            ex.print();
+            std::cout << "\n Record found, (yes) to confirm delete";
+            std::cin >> del;
+            if (del == "yes") {
+                st_list.erase(it);
+            } else return;
+            break;
+        } else continue;
+    }
+}
+
 void Student::print () const {
     std::cout << this->id << ".\t" << this->name << "\t\t" << this->surname << std::endl;
 }
@@ -70,13 +89,13 @@ bool sortBySurname(const Student &lhs, const Student &rhs) {
 
 void print_st_list () {
     std::sort(st_list.begin(), st_list.end(), sortBySurname);
-    for (Student st : st_list){
+    for (Student& st : st_list){
         st.print();
     }
 }
 
 void print_sj_list () {
-    for (Subject sj : sj_list) {
+    for (Subject& sj : sj_list) {
         sj.print();
     }
 }
@@ -119,13 +138,14 @@ void menu () {
     std::cout << "Menu" << std::endl;
     std::cout << "1. Search for a student" << std::endl;
     std::cout << "2. Add a new student" << std::endl;
-    std::cout << "3. Search for a subject" << std::endl;
-    std::cout << "4. Add a new subject" << std::endl;
-    std::cout << "5. Print list of student enrolled" << std::endl;
-    std::cout << "6. Print list of subjects offered" << std::endl;
-    std::cout << "7. Print all marks of a student" << std::endl;
-    std::cout << "8. Print all results for a subject" << std::endl;
-    std::cout << "9. Exit" << std::endl;
+    std::cout << "3. Remove a student" << std::endl;
+    std::cout << "4. View list of student enrolled" << std::endl;
+    std::cout << "5. View list of subjects offered" << std::endl;
+    std::cout << "6. Add a new subject" << std::endl;
+    std::cout << "7. Add new results" << std::endl;
+    std::cout << "8. View all results for a subject" << std::endl;
+    std::cout << "9. view all marks of a student" << std::endl;
+    std::cout << "0. Exit" << std::endl;
 }
 
 void st_DB() {
@@ -245,7 +265,7 @@ void sj_DB () {
     add_sj("C#");
     add_sj("Java");
     add_sj("JavaScript");
-    add_sj("Perl");
+    add_sj("Pearl");
     add_sj("Pascal");
     add_sj("PHP");
     add_sj("HTML");

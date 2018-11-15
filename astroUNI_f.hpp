@@ -17,10 +17,12 @@ struct Student {
 
     void print () const;
     bool operator<(const Student& other) const;
+    bool operator== (const Student& other) const;
 };
 
 void st_search (const std::string& keyword);
 void add_st (const std::string& name, const std::string& surname);
+void remove_st (const Student& ex);
 bool sortBySurname(const Student &lhs, const Student &rhs);
 void print_st_list ();
 
