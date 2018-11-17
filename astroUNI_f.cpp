@@ -265,7 +265,7 @@ void sj_DB () {
     add_sj("C#");
     add_sj("Java");
     add_sj("JavaScript");
-    add_sj("Pearl");
+    add_sj("Perl");
     add_sj("Pascal");
     add_sj("PHP");
     add_sj("HTML");
